@@ -1,0 +1,41 @@
+{
+  "name": "nonci",
+  "version": "0.0.1",
+  "description": "wrapper sdk for nonci api",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist/ && npm run format && npm run lint && tsup src/ --format esm,cjs --dts",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix 'src/**/*.{js,ts}'",
+    "format": "prettier --write 'src/**/*.ts' --config ./.prettierrc",
+    "prepublishOnly": "npm run build",
+    "localPub": "npm run build && rm ./*.tgz && npm pack && cd example/ && npm run getSonic && cd .."
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.mjs"
+    }
+  },
+  "repository": "https://github.com/nonci-xyz/sdk.git",
+  "author": "Sahil Pabale <dev.sahilpabale@gmail.com> (https://sahil.lol)",
+  "keywords": [],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.13",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {}
+}
