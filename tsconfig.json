@@ -7,7 +7,8 @@
       "declaration": true,
       "declarationMap":true,
       "paths": {
-        "@/*": ["src/*"]
+        "@/*": ["src/*"],
+        "example/*": ["example/*"]
       },
       "baseUrl": ".",
       "esModuleInterop": true,
@@ -27,5 +28,5 @@
       "target": "ES6",
       "composite": false
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "example/**/*.ts"]
 }

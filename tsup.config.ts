@@ -1,7 +1,7 @@
-import { Options } from "tsup";
+import { Options } from 'tsup';
 
 export const tsupConfig: Options = {
-  target: "esnext",
+  target: 'esnext',
   clean: true,
   dts: true,
   keepNames: true,
@@ -9,5 +9,5 @@ export const tsupConfig: Options = {
   sourcemap: true,
   splitting: false,
   treeshake: true,
-  format: ["cjs", "esm"],
+  format: ['cjs', 'esm']
 };

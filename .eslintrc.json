@@ -26,6 +26,7 @@
       "quotes": ["error", "single"],
       "no-duplicate-imports": "error",
       "@typescript-eslint/no-explicit-any": "off",
-      "no-constant-condition": "off"
+      "no-constant-condition": "off",
+      "@typescript-eslint/no-var-requires": 0
   }
 }
