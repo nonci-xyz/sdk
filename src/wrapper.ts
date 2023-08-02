@@ -12,8 +12,8 @@ export class Nonci {
 
   // create nonce
   public async createNonce(): Promise<CreateNonceResponse> {
-    const response = await axios(`${this.hostUri}/nonce/create`, {
-      method: 'GET',
+    const response = await axios(`${this.hostUri}/nonce`, {
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${this.secret}`
       }
@@ -24,7 +24,7 @@ export class Nonci {
 
   // get all nonces
   public async getAllNonces(): Promise<Nonce[]> {
-    const response = await axios(`${this.hostUri}/nonce/all`, {
+    const response = await axios(`${this.hostUri}/nonce`, {
       method: 'GET'
     });
 
@@ -33,7 +33,7 @@ export class Nonci {
 
   // get active nonces
   public async getActiveNonces(): Promise<Nonce[]> {
-    const response = await axios(`${this.hostUri}/nonce/active`, {
+    const response = await axios(`${this.hostUri}/nonce?status=active`, {
       method: 'GET'
     });
 
@@ -42,7 +42,7 @@ export class Nonci {
 
   // get used nonces
   public async getUsedNonces(): Promise<Nonce[]> {
-    const response = await axios(`${this.hostUri}/nonce/used`, {
+    const response = await axios(`${this.hostUri}/nonce?status=used`, {
       method: 'GET'
     });
 
@@ -51,7 +51,7 @@ export class Nonci {
 
   // get nonce by id
   public async getNonceById(id: string): Promise<Nonce> {
-    const response = await axios(`${this.hostUri}/nonce/id/${id}`, {
+    const response = await axios(`${this.hostUri}/nonce?id=${id}`, {
       method: 'GET'
     });
 
@@ -59,8 +59,17 @@ export class Nonci {
   }
 
   // get nonce by public key
-  public async getNonceByPublicKey(id: string): Promise<Nonce> {
-    const response = await axios(`${this.hostUri}/nonce/publicKey/${id}`, {
+  public async getNonceByPublicKey(publicKey: string): Promise<Nonce> {
+    const response = await axios(`${this.hostUri}/nonce?publicKey=${publicKey}`, {
+      method: 'GET'
+    });
+
+    return await response.data.nonce;
+  }
+
+  // get nonce by value
+  public async getNonceByValue(value: string): Promise<Nonce> {
+    const response = await axios(`${this.hostUri}/nonce?value=${value}`, {
       method: 'GET'
     });
 
@@ -82,7 +91,7 @@ export class Nonci {
 
   // get all transactions
   public async getAllTxs(): Promise<Transaction[]> {
-    const response = await axios(`${this.hostUri}/transaction/all`, {
+    const response = await axios(`${this.hostUri}/transaction`, {
       method: 'GET'
     });
 
@@ -91,7 +100,7 @@ export class Nonci {
 
   // get pending transactions
   public async getPendingTxs(): Promise<Transaction[]> {
-    const response = await axios(`${this.hostUri}/transaction/pending`, {
+    const response = await axios(`${this.hostUri}/transaction?status=pending`, {
       method: 'GET'
     });
 
@@ -100,7 +109,7 @@ export class Nonci {
 
   // get processed transactions
   public async getProcessedTxs(): Promise<Transaction[]> {
-    const response = await axios(`${this.hostUri}/transaction/processed`, {
+    const response = await axios(`${this.hostUri}/transaction?status=processed`, {
       method: 'GET'
     });
 
@@ -109,7 +118,7 @@ export class Nonci {
 
   // get transaction by id
   public async getTxById(id: string): Promise<Transaction> {
-    const response = await axios(`${this.hostUri}/transaction/id/${id}`, {
+    const response = await axios(`${this.hostUri}/transaction?id=${id}`, {
       method: 'GET'
     });
 
@@ -118,11 +127,11 @@ export class Nonci {
 
   // get transaction by recipient
   public async getTxByRecipient(recipient: string): Promise<Transaction[]> {
-    const response = await axios(`${this.hostUri}/transaction/recipient/${recipient}`, {
+    const response = await axios(`${this.hostUri}/transaction?recipient=${recipient}`, {
       method: 'GET'
     });
 
-    return await response.data.transaction;
+    return await response.data.transactions;
   }
 
   // get random transaction with nonce
